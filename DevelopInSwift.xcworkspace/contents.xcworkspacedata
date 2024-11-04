@@ -13,4 +13,7 @@
    <FileRef
       location = "group:Tutorials/SwiftUI foundations/Buttons and state/DiceRoller/DiceRoller.xcodeproj">
    </FileRef>
+   <FileRef
+      location = "group:Tutorials/SwiftUI foundations/Lists and text fields/Pick-a-Pal/Pick-a-Pal.xcodeproj">
+   </FileRef>
 </Workspace>
