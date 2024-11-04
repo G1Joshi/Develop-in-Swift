@@ -10,4 +10,7 @@
    <FileRef
       location = "group:Tutorials/SwiftUI foundations/Layout and style/OnboardingFlow/OnboardingFlow.xcodeproj">
    </FileRef>
+   <FileRef
+      location = "group:Tutorials/SwiftUI foundations/Buttons and state/DiceRoller/DiceRoller.xcodeproj">
+   </FileRef>
 </Workspace>
