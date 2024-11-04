@@ -7,4 +7,7 @@
    <FileRef
       location = "group:Tutorials/SwiftUI foundations/Views, structures, and properties/WeatherForecast/WeatherForecast.xcodeproj">
    </FileRef>
+   <FileRef
+      location = "group:Tutorials/SwiftUI foundations/Layout and style/OnboardingFlow/OnboardingFlow.xcodeproj">
+   </FileRef>
 </Workspace>
