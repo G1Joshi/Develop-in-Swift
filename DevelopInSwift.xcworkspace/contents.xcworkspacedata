@@ -4,4 +4,7 @@
    <FileRef
       location = "group:Tutorials/SwiftUI foundations/Explore Xcode/ChatPrototype/ChatPrototype.xcodeproj">
    </FileRef>
+   <FileRef
+      location = "group:Tutorials/SwiftUI foundations/Views, structures, and properties/WeatherForecast/WeatherForecast.xcodeproj">
+   </FileRef>
 </Workspace>
