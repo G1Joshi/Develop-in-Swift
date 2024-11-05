@@ -19,4 +19,7 @@
    <FileRef
       location = "group:Tutorials/Data modeling/Custom types and Swift Testing/ScoreKeeper/ScoreKeeper.xcodeproj">
    </FileRef>
+   <FileRef
+      location = "group:Tutorials/Data modeling/Models and persistence/Birthdays/Birthdays.xcodeproj">
+   </FileRef>
 </Workspace>
