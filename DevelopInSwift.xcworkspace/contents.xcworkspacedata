@@ -16,4 +16,7 @@
    <FileRef
       location = "group:Tutorials/SwiftUI foundations/Lists and text fields/Pick-a-Pal/Pick-a-Pal.xcodeproj">
    </FileRef>
+   <FileRef
+      location = "group:Tutorials/Data modeling/Custom types and Swift Testing/ScoreKeeper/ScoreKeeper.xcodeproj">
+   </FileRef>
 </Workspace>
