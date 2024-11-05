@@ -5,19 +5,26 @@
 //  Created by Jeevan Chandra Joshi on 05/11/24.
 //
 
+import SwiftData
 import SwiftUI
 
 struct ContentView: View {
-    @State private var friends: [Friend] = []
+    @Environment(\.modelContext) private var context
+    @Query(sort: \Friend.birthday) private var friends: [Friend]
 
     @State private var newName: String = ""
     @State private var newDate: Date = .now
 
     var body: some View {
         NavigationStack {
-            List(friends, id: \.name) { friend in
+            List(friends) { friend in
                 HStack {
+                    if friend.isBirthdayToday {
+                        Image(systemName: "birthday.cake")
+                    }
+
                     Text(friend.name)
+                        .bold(friend.isBirthdayToday)
 
                     Spacer()
 
@@ -35,14 +42,24 @@ struct ContentView: View {
                             .textFieldStyle(.roundedBorder)
                     }
 
-                    Button("Save") {
-                        let newFriend = Friend(name: newName, birthday: newDate)
-                        friends.append(newFriend)
+                    HStack {
+                        Button("Save") {
+                            let newFriend = Friend(name: newName, birthday: newDate)
+                            context.insert(newFriend)
 
-                        newName = ""
-                        newDate = .now
+                            newName = ""
+                            newDate = .now
+                        }
+                        .bold()
+
+                        Button("Reset") {
+                            do {
+                                try context.delete(model: Friend.self)
+                            } catch {
+                                fatalError()
+                            }
+                        }
                     }
-                    .bold()
                 }
                 .padding()
                 .background(.bar)
@@ -53,4 +70,5 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
+        .modelContainer(for: Friend.self, inMemory: true)
 }
