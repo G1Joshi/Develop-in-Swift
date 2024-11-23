@@ -8,7 +8,16 @@
 import SwiftUI
 
 struct MovieDetail: View {
+    @Environment(\.dismiss) private var dismiss
+    @Environment(\.modelContext) private var context
+
     @Bindable var movie: Movie
+    let isNew: Bool
+
+    init(movie: Movie, isNew: Bool = false) {
+        self.movie = movie
+        self.isNew = isNew
+    }
 
     var body: some View {
         Form {
@@ -17,8 +26,24 @@ struct MovieDetail: View {
 
             DatePicker("Release date", selection: $movie.releaseDate)
         }
-        .navigationTitle("Movie")
+        .navigationTitle(isNew ? "New movie" : "Movie")
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            if isNew {
+                ToolbarItem(placement: .confirmationAction) {
+                    Button("Save") {
+                        dismiss()
+                    }
+                }
+
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Cancel") {
+                        context.delete(movie)
+                        dismiss()
+                    }
+                }
+            }
+        }
     }
 }
 

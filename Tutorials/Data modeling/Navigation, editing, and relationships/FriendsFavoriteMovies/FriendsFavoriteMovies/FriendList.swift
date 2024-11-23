@@ -11,6 +11,7 @@ import SwiftUI
 struct FriendList: View {
     @Query(sort: \Friend.name) private var friends: [Friend]
     @Environment(\.modelContext) private var context
+    @State private var newFriend: Friend?
 
     var body: some View {
         NavigationSplitView {
@@ -32,6 +33,12 @@ struct FriendList: View {
                     EditButton()
                 }
             }
+            .sheet(item: $newFriend) { friend in
+                NavigationStack {
+                    FriendDetail(friend: friend, isNew: true)
+                }
+                .interactiveDismissDisabled()
+            }
         } detail: {
             Text("Select a friend")
                 .navigationTitle("Friend")
@@ -40,7 +47,8 @@ struct FriendList: View {
     }
 
     private func addFriend() {
-        context.insert(Friend(name: ""))
+        newFriend = Friend(name: "")
+        context.insert(newFriend!)
     }
 
     private func deleteFriends(indexes: IndexSet) {
