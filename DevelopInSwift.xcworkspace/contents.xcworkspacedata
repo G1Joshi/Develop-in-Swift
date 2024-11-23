@@ -22,4 +22,7 @@
    <FileRef
       location = "group:Tutorials/Data modeling/Models and persistence/Birthdays/Birthdays.xcodeproj">
    </FileRef>
+   <FileRef
+      location = "group:Tutorials/Data modeling/Navigation, editing, and relationships/FriendsFavoriteMovies/FriendsFavoriteMovies.xcodeproj">
+   </FileRef>
 </Workspace>
