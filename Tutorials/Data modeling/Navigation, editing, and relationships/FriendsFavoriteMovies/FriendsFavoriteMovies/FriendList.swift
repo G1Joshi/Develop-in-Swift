@@ -14,16 +14,38 @@ struct FriendList: View {
 
     var body: some View {
         NavigationSplitView {
-            List(friends) { friend in
-                NavigationLink(friend.name) {
-                    FriendDetail(friend: friend)
+            List {
+                ForEach(friends) { friend in
+                    NavigationLink(friend.name) {
+                        FriendDetail(friend: friend)
+                    }
                 }
+                .onDelete(perform: deleteFriends(indexes:))
             }
             .navigationTitle("Friends")
+            .toolbar {
+                ToolbarItem {
+                    Button("Add friend", systemImage: "plus", action: addFriend)
+                }
+
+                ToolbarItem(placement: .topBarTrailing) {
+                    EditButton()
+                }
+            }
         } detail: {
             Text("Select a friend")
                 .navigationTitle("Friend")
                 .navigationBarTitleDisplayMode(.inline)
+        }
+    }
+
+    private func addFriend() {
+        context.insert(Friend(name: ""))
+    }
+
+    private func deleteFriends(indexes: IndexSet) {
+        for index in indexes {
+            context.delete(friends[index])
         }
     }
 }
