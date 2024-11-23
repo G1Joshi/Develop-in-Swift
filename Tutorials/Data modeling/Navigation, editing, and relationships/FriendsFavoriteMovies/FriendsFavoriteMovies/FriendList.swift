@@ -16,9 +16,7 @@ struct FriendList: View {
         NavigationSplitView {
             List(friends) { friend in
                 NavigationLink(friend.name) {
-                    Text(friend.name)
-                        .navigationTitle("Friend")
-                        .navigationBarTitleDisplayMode(.inline)
+                    FriendDetail(friend: friend)
                 }
             }
             .navigationTitle("Friends")
