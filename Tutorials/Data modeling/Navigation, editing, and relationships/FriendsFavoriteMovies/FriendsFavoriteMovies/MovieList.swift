@@ -13,10 +13,19 @@ struct MovieList: View {
     @Environment(\.modelContext) private var context
 
     var body: some View {
-        List {
-            ForEach(movies) { movie in
-                Text(movie.title)
+        NavigationSplitView {
+            List(movies) { movie in
+                NavigationLink(movie.title) {
+                    Text(movie.title)
+                        .navigationTitle("Movie")
+                        .navigationBarTitleDisplayMode(.inline)
+                }
             }
+            .navigationTitle("Movies")
+        } detail: {
+            Text("Select a movie")
+                .navigationTitle("Movie")
+                .navigationBarTitleDisplayMode(.inline)
         }
     }
 }
