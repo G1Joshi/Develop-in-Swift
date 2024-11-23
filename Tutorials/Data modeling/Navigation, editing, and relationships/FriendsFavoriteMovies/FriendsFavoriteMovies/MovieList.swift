@@ -16,9 +16,7 @@ struct MovieList: View {
         NavigationSplitView {
             List(movies) { movie in
                 NavigationLink(movie.title) {
-                    Text(movie.title)
-                        .navigationTitle("Movie")
-                        .navigationBarTitleDisplayMode(.inline)
+                    MovieDetail(movie: movie)
                 }
             }
             .navigationTitle("Movies")
