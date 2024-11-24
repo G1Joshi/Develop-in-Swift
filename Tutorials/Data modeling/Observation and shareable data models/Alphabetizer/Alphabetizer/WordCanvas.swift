@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct WordCanvas: View {
-    @State private var tiles: [Tile] = [
-        Tile(word: "First"),
-        Tile(word: "Second"),
-        Tile(word: "Third")
-    ]
+    @Environment(Alphabetizer.self) private var alphabetizer
+
+    private var tiles: [Tile] {
+        alphabetizer.tiles
+    }
 
     var body: some View {
         ZStack {
@@ -24,7 +24,7 @@ struct WordCanvas: View {
                         .frame(width: Tile.placeholderSize, height: Tile.placeholderSize)
                 }
             }
-            ForEach($tiles) { $tile in
+            ForEach(tiles) { tile in
                 TileView(tile: tile)
                     .offset(tile.centeredOffset)
                     .gesture(DragGesture().onChanged { value in
@@ -36,17 +36,29 @@ struct WordCanvas: View {
         .onAppear {
             setInitialTilePositions()
         }
+        .onChange(of: alphabetizer.message) { oldValue, newValue in
+            switch (oldValue, newValue) {
+                case (.youWin, .instructions):
+                    withAnimation {
+                        setInitialTilePositions()
+                    }
+                default:
+                    break
+            }
+        }
     }
 }
 
 #Preview {
     WordCanvas()
+        .environment(Alphabetizer())
 }
 
 extension WordCanvas {
     private func setInitialTilePositions() {
-        for (index, tile) in tiles.enumerated() {
+        for (index, _) in tiles.enumerated() {
             let midpoint = Double(tiles.count - 1) / 2.0
+
             let position = Double(index) - midpoint
 
             tiles[index].position.x = (Tile.size + Tile.spacing) * position
